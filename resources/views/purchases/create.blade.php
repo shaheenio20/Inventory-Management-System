@@ -9,8 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                  <div class="mb-4 flex justify-end">
-                        <a href="{{ route('purchases.index') }}" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
-                            Back to Purchases
+                        <a href="{{ route('purchases.index') }}" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                            Back to Purchase
                         </a>
                     </div>
                 <div class="p-6 text-gray-900">
@@ -64,7 +64,7 @@
                                 @endfor
                             </div>
 
-                            <button type="button" onclick="addPurchaseRow()" class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Add another item</button>
+                            <button type="button" onclick="addPurchaseRow()" class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium">Add another item</button>
                         </div>
 
                         <div class="flex items-center justify-end mt-6">

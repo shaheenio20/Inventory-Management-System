@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mb-4 flex justify-end">
-                    <a href="{{ route('stock.create') }}" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                    <a href="{{ route('stock.create') }}" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
                         Add Stock Entry
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                         <div class="flex sm:justify-end">
-                            <button type="submit" class="inline-flex w-full justify-center sm:w-auto items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Filter</button>
+                            <button type="submit" class="inline-flex w-full justify-center sm:w-auto items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium">Filter</button>
                         </div>
                     </form>
 

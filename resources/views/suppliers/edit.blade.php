@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Edit Supplier') }}</h2>
-            <a href="{{ route('suppliers.index') }}" class="text-gray-600 hover:text-gray-900">Back to Suppliers</a>
+            <a href="{{ route('suppliers.index') }}" class="text-gray-600 hover:text-gray-900 font-medium">Back to Supplier</a>
         </div>
     </x-slot>
 

@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                  <div class="mb-4 flex justify-end">
-                        <a href="{{ route('purchases.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2">
+                        <a href="{{ route('purchases.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2 font-medium">
                             Add Purchase Order
                         </a>
                     </div>

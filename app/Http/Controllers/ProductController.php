@@ -57,6 +57,12 @@ class ProductController extends Controller
         $categories = \App\Models\Category::all();
         return view('products.edit', compact('product', 'categories'));
     }
+
+    public function show(\App\Models\Product $product)
+    {
+        $product->load(['category', 'stockTransactions']);
+        return view('products.show', compact('product'));
+    }
     
     public function update(Request $request, \App\Models\Product $product)
     {

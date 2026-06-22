@@ -111,6 +111,12 @@
                         <span>Sales</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('reports.index') }}" class="sidebar-link {{ request()->routeIs('reports.*') ? 'active' : '' }} flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200">
+                        <i class="fas fa-chart-line w-5 text-center text-yellow-400"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
             </ul>
 
             @if(auth()->user()->role === 'admin')

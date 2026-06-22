@@ -2,13 +2,17 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Invoice') }}</h2>
-            <a href="{{ route('sales.index') }}" class="text-gray-600 hover:text-gray-900">Back to Sales</a>
         </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="mb-4 flex justify-end">
+                    <a href="{{ route('sales.index') }}" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                        Back to Sale
+                    </a>
+                </div>
                 <div class="p-6 text-gray-900">
                     <div class="mb-8">
                         <div class="flex items-center justify-between">
@@ -37,12 +41,12 @@
                             </thead>
                             <tbody>
                                 @foreach($sale->items as $item)
-                                    <tr class="border-b hover:bg-gray-50 transition">
-                                        <td class="p-4 text-gray-900">{{ $item->product->name ?? 'Unknown product' }}</td>
-                                        <td class="p-4 text-gray-700">{{ $item->quantity }}</td>
-                                        <td class="p-4 text-gray-700">${{ number_format($item->unit_price, 2) }}</td>
-                                        <td class="p-4 text-gray-700">${{ number_format($item->quantity * $item->unit_price, 2) }}</td>
-                                    </tr>
+                                <tr class="border-b hover:bg-gray-50 transition">
+                                    <td class="p-4 text-gray-900">{{ $item->product->name ?? 'Unknown product' }}</td>
+                                    <td class="p-4 text-gray-700">{{ $item->quantity }}</td>
+                                    <td class="p-4 text-gray-700">${{ number_format($item->unit_price, 2) }}</td>
+                                    <td class="p-4 text-gray-700">${{ number_format($item->quantity * $item->unit_price, 2) }}</td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -62,7 +66,7 @@
                     </div>
 
                     <div class="mt-6 text-right">
-                        <button onclick="window.print()" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Print Invoice</button>
+                        <button onclick="window.print()" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium">Print Invoice</button>
                     </div>
                 </div>
             </div>
