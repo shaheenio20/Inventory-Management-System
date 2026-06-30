@@ -20,7 +20,7 @@ Route::get('/dashboard', function () {
     $recentSales   = \App\Models\Sale::latest()->take(5)->get();
     $categories    = \App\Models\Category::withCount('products')->get();
 
-    return view('dashboard', compact(
+    return \Inertia\Inertia::render('Dashboard', compact(
         'totalProducts', 'totalStock', 'totalSales',
         'lowStockCount', 'lowStockProducts', 'recentSales', 'categories'
     ));

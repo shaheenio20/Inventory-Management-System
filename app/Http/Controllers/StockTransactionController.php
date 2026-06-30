@@ -27,13 +27,16 @@ class StockTransactionController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        return view('stock.index', compact('transactions'));
+        return \Inertia\Inertia::render('Stock/Index', [
+            'transactions' => $transactions,
+            'filters' => ['type' => $request->type]
+        ]);
     }
 
     public function create()
     {
         $products = Product::all();
-        return view('stock.create', compact('products'));
+        return \Inertia\Inertia::render('Stock/Create', ['products' => $products]);
     }
 
     public function store(Request $request)

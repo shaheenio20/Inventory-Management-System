@@ -21,14 +21,14 @@ class PurchaseController extends Controller
                       });
             })->latest()->paginate(20)->withQueryString();
 
-        return view('purchases.index', compact('purchases'));
+        return \Inertia\Inertia::render('Purchases/Index', ['purchases' => $purchases]);
     }
 
     public function create()
     {
         $suppliers = Supplier::all();
         $products  = Product::all();
-        return view('purchases.create', compact('suppliers', 'products'));
+        return \Inertia\Inertia::render('Purchases/Create', ['suppliers' => $suppliers, 'products' => $products]);
     }
 
     public function store(Request $request)
@@ -70,7 +70,7 @@ class PurchaseController extends Controller
     public function show(Purchase $purchase)
     {
         $purchase->load(['supplier', 'items.product']);
-        return view('purchases.show', compact('purchase'));
+        return \Inertia\Inertia::render('Purchases/Show', ['purchase' => $purchase]);
     }
 
     public function receive(Purchase $purchase)

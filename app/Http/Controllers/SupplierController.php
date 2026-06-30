@@ -17,12 +17,12 @@ class SupplierController extends Controller
                       ->orWhere('address', 'like', "%{$search}%");
             })->get();
 
-        return view('suppliers.index', compact('suppliers'));
+        return \Inertia\Inertia::render('Suppliers/Index', ['suppliers' => $suppliers]);
     }
 
     public function create()
     {
-        return view('suppliers.create');
+        return \Inertia\Inertia::render('Suppliers/Create');
     }
 
     public function store(Request $request)
@@ -41,12 +41,12 @@ class SupplierController extends Controller
     public function show(Supplier $supplier)
     {
         $supplier->load(['purchases.items.product']);
-        return view('suppliers.show', compact('supplier'));
+        return \Inertia\Inertia::render('Suppliers/Show', ['supplier' => $supplier]);
     }
 
     public function edit(Supplier $supplier)
     {
-        return view('suppliers.edit', compact('supplier'));
+        return \Inertia\Inertia::render('Suppliers/Edit', ['supplier' => $supplier]);
     }
 
     public function update(Request $request, Supplier $supplier)

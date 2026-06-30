@@ -18,13 +18,13 @@ class ProductController extends Controller
                       });
             })->get();
 
-        return view('products.index', compact('products'));
+        return \Inertia\Inertia::render('Products/Index', ['products' => $products]);
     }
     
     public function create()
     {
         $categories = \App\Models\Category::all();
-        return view('products.create', compact('categories'));
+        return \Inertia\Inertia::render('Products/Create', ['categories' => $categories]);
     }
     
     public function store(Request $request)
@@ -55,13 +55,13 @@ class ProductController extends Controller
     public function edit(\App\Models\Product $product)
     {
         $categories = \App\Models\Category::all();
-        return view('products.edit', compact('product', 'categories'));
+        return \Inertia\Inertia::render('Products/Edit', ['product' => $product, 'categories' => $categories]);
     }
 
     public function show(\App\Models\Product $product)
     {
         $product->load(['category', 'stockTransactions']);
-        return view('products.show', compact('product'));
+        return \Inertia\Inertia::render('Products/Show', ['product' => $product]);
     }
     
     public function update(Request $request, \App\Models\Product $product)

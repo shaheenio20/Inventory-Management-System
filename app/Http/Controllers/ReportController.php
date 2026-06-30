@@ -56,18 +56,18 @@ class ReportController extends Controller
             ->with('product')
             ->get();
 
-        return view('reports.index', compact(
-            'period',
-            'totalSalesCount',
-            'totalSalesValue',
-            'totalPurchaseCost',
-            'grossProfit',
-            'grossProfitMargin',
-            'stockValue',
-            'lowStockProducts',
-            'stockReportProducts',
-            'latestInventoryUpdate',
-            'topSellingProducts'
-        ));
+        return \Inertia\Inertia::render('Reports/Index', [
+            'period' => $period,
+            'totalSalesCount' => $totalSalesCount,
+            'totalSalesValue' => $totalSalesValue,
+            'totalPurchaseCost' => $totalPurchaseCost,
+            'grossProfit' => $grossProfit,
+            'grossProfitMargin' => $grossProfitMargin,
+            'stockValue' => $stockValue,
+            'lowStockProducts' => $lowStockProducts,
+            'stockReportProducts' => $stockReportProducts,
+            'latestInventoryUpdate' => $latestInventoryUpdate,
+            'topSellingProducts' => $topSellingProducts
+        ]);
     }
 }

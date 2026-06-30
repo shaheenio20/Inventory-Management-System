@@ -18,13 +18,13 @@ class SaleController extends Controller
                       ->orWhere('customer_phone', 'like', "%{$search}%");
             })->latest()->paginate(20)->withQueryString();
 
-        return view('sales.index', compact('sales'));
+        return \Inertia\Inertia::render('Sales/Index', ['sales' => $sales]);
     }
 
     public function create()
     {
         $products = Product::where('stock_quantity', '>', 0)->get();
-        return view('sales.create', compact('products'));
+        return \Inertia\Inertia::render('Sales/Create', ['products' => $products]);
     }
 
     public function store(Request $request)
@@ -79,12 +79,12 @@ class SaleController extends Controller
     public function show(Sale $sale)
     {
         $sale->load('items.product');
-        return view('sales.show', compact('sale'));
+        return \Inertia\Inertia::render('Sales/Show', ['sale' => $sale]);
     }
 
     public function invoice(Sale $sale)
     {
         $sale->load('items.product');
-        return view('sales.invoice', compact('sale'));
+        return \Inertia\Inertia::render('Sales/Invoice', ['sale' => $sale]);
     }
 }

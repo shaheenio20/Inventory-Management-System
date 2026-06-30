@@ -13,12 +13,12 @@ class CategoryController extends Controller
                   ->orWhere('description', 'like', "%{$search}%");
         })->get();
 
-        return view('categories.index', compact('categories'));
+        return \Inertia\Inertia::render('Categories/Index', ['categories' => $categories]);
     }
 
     public function create()
     {
-        return view('categories.create');
+        return \Inertia\Inertia::render('Categories/Create');
     }
 
     public function store(\Illuminate\Http\Request $request)
@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     public function edit(\App\Models\Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return \Inertia\Inertia::render('Categories/Edit', ['category' => $category]);
     }
 
     public function update(\Illuminate\Http\Request $request, \App\Models\Category $category)
@@ -55,6 +55,4 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
-
-
 }
