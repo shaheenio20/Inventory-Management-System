@@ -18,7 +18,8 @@
         <style>
             body {
                 font-family: 'Inter', sans-serif;
-                background: #0a0a0f;
+                background: linear-gradient(to left, #020617 0%, #312e81 45%, #0f766e 100%);
+                background-attachment: fixed;
                 min-height: 100vh;
                 display: flex;
                 align-items: center;
@@ -61,13 +62,12 @@
             .login-card {
                 width: 100%;
                 max-width: 420px;
-                background: rgba(255,255,255,0.03);
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
-                border: 1px solid rgba(255,255,255,0.07);
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: 20px;
                 padding: 40px 36px;
-                box-shadow: 0 24px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
                 position: relative;
                 z-index: 10;
             }
@@ -195,7 +195,7 @@
             .btn-signin {
                 width: 100%;
                 padding: 13px;
-                background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+                background: linear-gradient(to left, #0f172a 0%, #4338ca 45%, #0891b2 100%);
                 color: #fff;
                 font-size: 0.9375rem;
                 font-weight: 700;

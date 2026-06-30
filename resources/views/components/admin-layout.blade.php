@@ -36,6 +36,10 @@
                 background: #111827;
             }
         }
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body class="bg-gray-200">
@@ -47,7 +51,7 @@
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between gap-3">
             <a href="{{ route('dashboard') }}" class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                <div class="w-8 h-8 shrink-0 bg-blue-500 rounded-lg flex items-center justify-center">
                     <i class="fas fa-boxes text-white text-sm"></i>
                 </div>
                 <span class="text-lg font-bold text-white">Notus IMS</span>
@@ -58,7 +62,7 @@
         </div>
 
         <!-- Nav Links -->
-        <div class="flex-1 px-4 py-6">
+        <div class="flex-1 px-4 py-6 overflow-x-auto custom-scrollbar">
             <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-3 px-2">Main</p>
             <ul class="space-y-1">
                 <li>
@@ -123,7 +127,7 @@
             <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mt-6 mb-3 px-2">Admin</p>
             <ul class="space-y-1">
                 <li>
-                    <a href="#" class="sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200">
+                    <a href="{{ route('users.index') }}" class="sidebar-link {{ request()->routeIs('users.*') ? 'active' : '' }} flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200">
                         <i class="fas fa-users w-5 text-center text-red-400"></i>
                         <span>User Management</span>
                     </a>
@@ -133,9 +137,9 @@
         </div>
 
         <!-- User at bottom -->
-        <div class="px-4 py-4 border-t border-gray-700">
+        <div class="px-4 py-4 border-t border-gray-700 mt-auto">
             <div class="flex items-center space-x-3 px-3 py-2">
-                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+                <div class="w-8 h-8 shrink-0 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 <div class="flex-1 min-w-0">
@@ -191,7 +195,7 @@
                     <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
                 </button>
                 <a href="{{ route('profile.edit') }}">
-                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+                    <div class="w-8 h-8 shrink-0 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
                 </a>

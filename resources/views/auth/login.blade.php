@@ -3,6 +3,9 @@
     @if (session('status'))
         <div class="session-status">{{ session('status') }}</div>
     @endif
+    @if (session('success'))
+        <div class="session-status">{{ session('success') }}</div>
+    @endif
 
     <h1 class="login-title">Welcome back</h1>
     <p class="login-subtitle">
@@ -82,28 +85,14 @@
 
     {{-- Demo Quick Login --}}
     <div class="demo-section">
-        <p class="demo-label">Demo: Quick Login as Role</p>
-        <div class="demo-buttons">
+        <p class="demo-label">Demo: Quick Login as Admin</p>
+        <div class="demo-buttons" style="grid-template-columns: 1fr;">
             <button
                 type="button"
                 class="demo-btn demo-btn-admin"
                 onclick="quickLogin('admin@admin.com', 'password')"
             >
                 Admin
-            </button>
-            <button
-                type="button"
-                class="demo-btn demo-btn-manager"
-                onclick="quickLogin('manager@manager.com', 'password')"
-            >
-                Manager
-            </button>
-            <button
-                type="button"
-                class="demo-btn demo-btn-staff"
-                onclick="quickLogin('staff@staff.com', 'password')"
-            >
-                Staff
             </button>
         </div>
     </div>
