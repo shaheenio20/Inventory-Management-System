@@ -88,6 +88,22 @@
                     </li>
                 </ul>
             </template>
+
+            <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mt-6 mb-3 px-2">Account</p>
+            <ul class="space-y-1">
+                <li>
+                    <Link href="/profile" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/profile') }]">
+                        <i class="fas fa-user-cog w-5 text-center text-blue-400"></i>
+                        <span>Profile Settings</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/logout" method="post" as="button" class="sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-red-400 hover:text-red-300 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                        <span>Log Out</span>
+                    </Link>
+                </li>
+            </ul>
         </div>
 
         <!-- User at bottom -->
@@ -100,9 +116,6 @@
                     <p class="text-sm font-medium text-white truncate">{{ $page.props.auth.user.name }}</p>
                     <p class="text-xs text-gray-400 uppercase">{{ $page.props.auth.user.role || 'Staff' }}</p>
                 </div>
-                <Link href="/logout" method="post" as="button" class="text-gray-400 hover:text-white transition" title="Logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                </Link>
             </div>
         </div>
     </nav>
@@ -135,10 +148,6 @@
                     <div class="w-8 h-8 shrink-0 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-sm hover:ring-2 hover:ring-blue-300 transition">
                         {{ $page.props.auth.user.name.charAt(0).toUpperCase() }}
                     </div>
-                </Link>
-                <Link href="/logout" method="post" as="button" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-red-600 hover:text-red-800 transition px-3 py-1.5 border border-red-200 hover:bg-red-50 rounded-md bg-white shadow-sm">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Log Out</span>
                 </Link>
             </div>
         </div>
