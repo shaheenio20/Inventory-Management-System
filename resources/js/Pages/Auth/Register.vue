@@ -119,12 +119,7 @@
             <!-- Register Button -->
             <button type="submit" class="btn-signin" :disabled="form.processing">Create account</button>
 
-            <!-- Password strength hint -->
-            <p style="text-align:center; font-size:0.72rem; color:rgba(255,255,255,0.25); margin-top:14px; line-height:1.5;">
-                By creating an account you agree to our
-                <span style="color:#a78bfa;">Terms of Service</span> &amp;
-                <span style="color:#a78bfa;">Privacy Policy</span>
-            </p>
+            
         </form>
     </GuestLayout>
 </template>

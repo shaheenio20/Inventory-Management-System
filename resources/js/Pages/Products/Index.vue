@@ -5,7 +5,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-4 flex justify-end">
-                        <Link href="/products/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                        <Link v-if="['admin', 'manager'].includes($page.props.auth.user.role)" href="/products/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
                             Add Product
                         </Link>
                     </div>
@@ -30,8 +30,10 @@
                                     <td class="p-4 text-green-600 font-semibold">${{ parseFloat(product.price).toFixed(2) }}</td>
                                     <td class="p-4 text-right space-x-2 flex justify-end">
                                         <Link :href="`/products/${product.id}`" class="inline-flex items-center rounded-md bg-slate-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-700 transition">View</Link>
-                                        <Link :href="`/products/${product.id}/edit`" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition">Edit</Link>
-                                        <button @click="deleteProduct(product.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 transition">Delete</button>
+                                        <template v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
+                                            <Link :href="`/products/${product.id}/edit`" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition">Edit</Link>
+                                            <button @click="deleteProduct(product.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 transition">Delete</button>
+                                        </template>
                                     </td>
                                 </tr>
                                 <tr v-if="products.length === 0">

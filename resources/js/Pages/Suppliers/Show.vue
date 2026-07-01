@@ -52,7 +52,7 @@
                                             <td class="p-4 text-gray-700">${{ parseFloat(purchase.total_amount).toFixed(2) }}</td>
                                             <td class="p-4 text-gray-600">{{ purchase.status }}</td>
                                             <td class="p-4 text-right">
-                                                <Link :href="`/purchases/${purchase.id}`" class="text-blue-600 hover:underline">View</Link>
+                                                <Link v-if="['admin', 'manager'].includes($page.props.auth.user.role)" :href="`/purchases/${purchase.id}`" class="text-blue-600 hover:underline">View</Link>
                                             </td>
                                         </tr>
                                         <tr v-if="!supplier.purchases || supplier.purchases.length === 0">

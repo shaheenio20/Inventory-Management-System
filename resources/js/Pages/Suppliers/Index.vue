@@ -7,7 +7,7 @@
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                  <div class="mb-4 flex justify-end">
-                        <Link href="/suppliers/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2 font-medium">
+                        <Link v-if="['admin', 'manager'].includes($page.props.auth.user.role)" href="/suppliers/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2 font-medium">
                             Add Supplier
                         </Link>
                     </div>
@@ -31,8 +31,10 @@
                                     <td class="p-4 text-gray-700">{{ supplier.purchases_count }}</td>
                                     <td class="p-4 text-right space-x-2 flex justify-end">
                                         <Link :href="`/suppliers/${supplier.id}`" class="inline-flex items-center rounded-md bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-200 transition">View</Link>
-                                        <Link :href="`/suppliers/${supplier.id}/edit`" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition">Edit</Link>
-                                        <button @click="deleteSupplier(supplier.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 transition">Delete</button>
+                                        <template v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
+                                            <Link :href="`/suppliers/${supplier.id}/edit`" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition">Edit</Link>
+                                            <button @click="deleteSupplier(supplier.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 transition">Delete</button>
+                                        </template>
                                     </td>
                                 </tr>
                                 <tr v-if="suppliers.length === 0">

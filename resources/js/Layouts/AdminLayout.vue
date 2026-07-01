@@ -29,7 +29,7 @@
 
             <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mt-6 mb-3 px-2">Inventory</p>
             <ul class="space-y-1">
-                <li>
+                <li v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
                     <Link href="/categories" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/categories') }]">
                         <i class="fas fa-tags w-5 text-center text-green-400"></i>
                         <span>Categories</span>
@@ -41,7 +41,7 @@
                         <span>Products</span>
                     </Link>
                 </li>
-                <li>
+                <li v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
                     <Link href="/stock" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/stock') }]">
                         <i class="fas fa-layer-group w-5 text-center text-purple-400"></i>
                         <span>Stock Management</span>
@@ -57,7 +57,7 @@
                         <span>Suppliers</span>
                     </Link>
                 </li>
-                <li>
+                <li v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
                     <Link href="/purchases" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/purchases') }]">
                         <i class="fas fa-shopping-bag w-5 text-center text-pink-400"></i>
                         <span>Purchases</span>
@@ -69,7 +69,7 @@
                         <span>Sales</span>
                     </Link>
                 </li>
-                <li>
+                <li v-if="['admin', 'manager'].includes($page.props.auth.user.role)">
                     <Link href="/reports" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/reports') }]">
                         <i class="fas fa-chart-line w-5 text-center text-yellow-400"></i>
                         <span>Reports</span>
