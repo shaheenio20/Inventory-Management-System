@@ -4,14 +4,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mb-4 flex justify-end">
-                    <Link href="/sales" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                    <Link href="/sales" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                         Back to Sales
                     </Link>
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Customer</h3>
+                            <h3 class="text-lg font-bold text-gray-900">Customer</h3>
                             <p class="text-gray-700">{{ sale.customer_name || 'Walk-in' }}</p>
                             <p class="text-gray-500 text-sm">{{ sale.customer_phone || 'No phone provided' }}</p>
                         </div>
@@ -34,7 +34,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Products Sold</h3>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Products Sold</h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>

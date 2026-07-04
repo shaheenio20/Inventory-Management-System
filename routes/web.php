@@ -79,11 +79,11 @@ Route::middleware('auth')->group(function () {
     // All Roles (Admin, Manager, Staff)
     // Products (Staff can only view, Admin/Manager can manage)
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/{product}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show')->where('product', '[0-9]+');
     
     // Suppliers (Staff can only view, Admin/Manager can manage)
     Route::get('/suppliers', [\App\Http\Controllers\SupplierController::class, 'index'])->name('suppliers.index');
-    Route::get('/suppliers/{supplier}', [\App\Http\Controllers\SupplierController::class, 'show'])->name('suppliers.show');
+    Route::get('/suppliers/{supplier}', [\App\Http\Controllers\SupplierController::class, 'show'])->name('suppliers.show')->where('supplier', '[0-9]+');
 
     // Sales (All Roles)
     Route::resource('sales', \App\Http\Controllers\SaleController::class)->only(['index', 'create', 'store', 'show']);

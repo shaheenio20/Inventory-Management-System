@@ -128,6 +128,7 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
 
 const form = useForm({
     name: '',
@@ -149,6 +150,16 @@ const togglePasswordConfirm = () => {
 
 const submit = () => {
     form.post('/register', {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Account Created!',
+                text: 'Welcome to the system.',
+                icon: 'success',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        },
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };

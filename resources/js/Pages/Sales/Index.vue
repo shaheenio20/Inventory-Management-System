@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                  <div class="mb-4 flex justify-end">
-                        <Link href="/sales/create" class="bg-indigo-600 m-2 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                        <Link href="/sales/create" class="bg-indigo-600 m-2 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                             Add Sale
                         </Link>
                     </div>

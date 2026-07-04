@@ -2,14 +2,10 @@
   <AdminLayout header="Categories">
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div v-if="$page.props.flash.success" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                <span class="block sm:inline">{{ $page.props.flash.success }}</span>
-            </div>
-            
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-4 flex justify-end">
-                        <Link href="/categories/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                        <Link href="/categories/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                             Add Category
                         </Link>
                     </div>
@@ -28,8 +24,8 @@
                                 <td class="p-4 font-medium text-gray-900">{{ category.name }}</td>
                                 <td class="p-4 text-gray-600">{{ category.description || 'N/A' }}</td>
                                 <td class="p-4 text-right space-x-2 flex justify-end">
-                                    <Link :href="`/categories/${category.id}/edit`" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition">Edit</Link>
-                                    <button @click="deleteCategory(category.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 transition">Delete</button>
+                                    <Link :href="`/categories/${category.id}/edit`" class="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm  text-white hover:bg-blue-700 transition font-bold">Edit</Link>
+                                    <button @click="deleteCategory(category.id)" class="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-bold text-white hover:bg-red-700 transition">Delete</button>
                                 </td>
                             </tr>
                             <tr v-if="categories.length === 0">
@@ -47,14 +43,36 @@
 <script setup>
 import AdminLayout from '../../Layouts/AdminLayout.vue';
 import { Link, router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     categories: Array
 });
 
 const deleteCategory = (id) => {
-    if (confirm('Are you sure you want to delete this category?')) {
-        router.delete(`/categories/${id}`);
-    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this category?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(`/categories/${id}`, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Category deleted successfully.',
+                        icon: 'success',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+    });
 };
 </script>

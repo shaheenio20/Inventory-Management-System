@@ -4,14 +4,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mb-4 flex justify-end">
-                    <Link href="/purchases" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                    <Link href="/purchases" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                         Back to Purchase
                     </Link>
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Supplier</h3>
+                            <h3 class="text-lg font-bold text-gray-900">Supplier</h3>
                             <p class="text-gray-700">{{ purchase.supplier?.name || 'N/A' }}</p>
                             <p class="text-gray-500 text-sm">{{ purchase.supplier?.email || 'No email provided' }}</p>
                             <p class="text-gray-500 text-sm">{{ purchase.supplier?.phone || 'No phone number' }}</p>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Purchase Items</h3>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Purchase Items</h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
@@ -76,12 +76,36 @@
 <script setup>
 import AdminLayout from '../../Layouts/AdminLayout.vue';
 import { Link, router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     purchase: Object
 });
 
 const receive = () => {
-    router.post(`/purchases/${props.purchase.id}/receive`);
+    Swal.fire({
+        title: 'Receive Purchase?',
+        text: "This will add the items to your inventory.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#16a34a',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, receive it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.post(`/purchases/${props.purchase.id}/receive`, {}, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: 'Received!',
+                        text: 'Purchase order has been received.',
+                        icon: 'success',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+    });
 };
 </script>

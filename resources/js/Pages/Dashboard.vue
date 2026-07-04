@@ -4,7 +4,7 @@
     <div class="bg-gradient-to-l from-slate-900 via-indigo-800 to-cyan-900 px-6 pt-8 pb-32 relative">
         <div class="max-w-7xl mx-auto">
             <p class="text-blue-200 text-sm mb-6">
-                <i class="fas fa-home mr-1"></i> / <span class="text-white font-medium ml-1">Dashboard</span>
+                <i class="fas fa-home mr-1"></i><span class="text-white font-medium ml-1">Dashboard</span>
             </p>
 
             <!-- Stat Cards Row -->

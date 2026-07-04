@@ -4,15 +4,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mb-4 flex justify-end">
-                    <Link href="/stock/create" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-medium">
+                    <Link href="/stock/create" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                         Add Stock Entry
                     </Link>
                 </div>
                 <div class="p-6 text-gray-900">
                     <form @submit.prevent="submitFilter" class="mb-6 grid gap-4 sm:grid-cols-[minmax(0,240px)_auto] items-end">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Type</label>
-                            <select v-model="filterType" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label class="block text-sm font-bold text-gray-700">Type</label>
+                            <select v-model="filterType" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 font-bold">
                                 <option value="">All Types</option>
                                 <option value="in">Stock In</option>
                                 <option value="out">Stock Out</option>
@@ -21,7 +21,7 @@
                             </select>
                         </div>
                         <div class="flex sm:justify-end">
-                            <button type="submit" class="inline-flex w-full justify-center sm:w-auto items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium">Filter</button>
+                            <button type="submit" class="inline-flex w-full justify-center sm:w-auto items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-bold">Filter</button>
                         </div>
                     </form>
 

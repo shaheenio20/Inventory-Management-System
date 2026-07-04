@@ -7,25 +7,25 @@
                     <form @submit.prevent="submit">
                         <div class="grid grid-cols-1 gap-6">
                             <div>
-                                <label for="name" class="block font-medium text-sm text-gray-700">Supplier Name</label>
+                                <label for="name" class="block font-bold text-sm text-gray-700">Supplier Name</label>
                                 <input id="name" v-model="form.name" type="text" required autofocus class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.name" class="text-sm text-red-600 mt-2">{{ form.errors.name }}</div>
                             </div>
 
                             <div>
-                                <label for="email" class="block font-medium text-sm text-gray-700">Email Address</label>
+                                <label for="email" class="block font-bold text-sm text-gray-700">Email Address</label>
                                 <input id="email" v-model="form.email" type="email" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.email" class="text-sm text-red-600 mt-2">{{ form.errors.email }}</div>
                             </div>
 
                             <div>
-                                <label for="phone" class="block font-medium text-sm text-gray-700">Phone Number</label>
+                                <label for="phone" class="block font-bold text-sm text-gray-700">Phone Number</label>
                                 <input id="phone" v-model="form.phone" type="text" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.phone" class="text-sm text-red-600 mt-2">{{ form.errors.phone }}</div>
                             </div>
 
                             <div>
-                                <label for="address" class="block font-medium text-sm text-gray-700">Address</label>
+                                <label for="address" class="block font-bold text-sm text-gray-700">Address</label>
                                 <textarea id="address" v-model="form.address" rows="4" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
                                 <div v-if="form.errors.address" class="text-sm text-red-600 mt-2">{{ form.errors.address }}</div>
                             </div>
@@ -48,6 +48,7 @@
 <script setup>
 import AdminLayout from '../../Layouts/AdminLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 const props = defineProps({
     supplier: Object
@@ -61,6 +62,17 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(`/suppliers/${props.supplier.id}`);
+    form.put(`/suppliers/${props.supplier.id}`, {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Supplier updated successfully.',
+                icon: 'success',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        }
+    });
 };
 </script>

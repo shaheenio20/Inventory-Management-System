@@ -91,6 +91,7 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 defineProps({
     canResetPassword: {
@@ -112,6 +113,16 @@ const form = useForm({
 
 const submit = () => {
     form.post('/login', {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Welcome Back!',
+                text: 'You have successfully logged in.',
+                icon: 'success',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        },
         onFinish: () => form.reset('password'),
     });
 };

@@ -4,7 +4,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mb-4 flex justify-end print:hidden">
-                    <Link href="/sales" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                    <Link href="/sales" class="m-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition font-bold">
                         Back to Sale
                     </Link>
                 </div>
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="mt-6 text-right print:hidden">
-                        <button @click="printInvoice" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium">Print Invoice</button>
+                        <button @click="printInvoice" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-bold">Print Invoice</button>
                     </div>
                 </div>
             </div>

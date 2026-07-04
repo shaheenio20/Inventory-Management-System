@@ -98,10 +98,10 @@
                     </Link>
                 </li>
                 <li>
-                    <Link href="/logout" method="post" as="button" class="sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-red-400 hover:text-red-300 w-full text-left">
+                    <button @click="handleLogout" class="sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-red-400 hover:text-red-300 w-full text-left">
                         <i class="fas fa-sign-out-alt w-5 text-center"></i>
                         <span>Log Out</span>
-                    </Link>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -163,6 +163,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 defineProps({
     header: String
@@ -186,12 +187,30 @@ const resetSearch = () => {
     searchQuery.value = '';
     submitSearch();
 };
+
+const handleLogout = () => {
+    Swal.fire({
+        title: 'Ready to leave?',
+        text: "You are about to log out of the system.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, log me out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.post('/logout');
+        }
+    });
+};
 </script>
 
 <style>
 .sidebar { width: 250px; height: 100vh; }
 .sidebar-link { transition: all 0.2s; }
+.sidebar-link span { font-weight: 600; }
 .sidebar-link:hover, .sidebar-link.active { background: rgba(255,255,255,0.15); border-radius: 6px; }
+.sidebar-link:not(.text-red-400):hover span, .sidebar-link:not(.text-red-400).active span { color: #60a5fa; font-weight: 700; }
 .main-content { margin-left: 250px; }
 @media (max-width: 768px) {
     .main-content { margin-left: 0; }

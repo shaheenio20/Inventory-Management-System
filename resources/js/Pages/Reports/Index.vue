@@ -3,9 +3,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="flex items-center gap-2 mb-4">
-                <Link href="/reports?period=daily" :class="`px-3 py-2 rounded-md text-sm font-medium ${period === 'daily' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Daily</Link>
-                <Link href="/reports?period=monthly" :class="`px-3 py-2 rounded-md text-sm font-medium ${period === 'monthly' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Monthly</Link>
-                <Link href="/reports?period=yearly" :class="`px-3 py-2 rounded-md text-sm font-medium ${period === 'yearly' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Yearly</Link>
+                <Link href="/reports?period=daily" :class="`px-3 py-2 rounded-md text-sm font-bold ${period === 'daily' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Daily</Link>
+                <Link href="/reports?period=monthly" :class="`px-3 py-2 rounded-md text-sm font-bold ${period === 'monthly' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Monthly</Link>
+                <Link href="/reports?period=yearly" :class="`px-3 py-2 rounded-md text-sm font-bold ${period === 'yearly' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-200'}`">Yearly</Link>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -37,7 +37,7 @@
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div class="xl:col-span-2 bg-white rounded-xl shadow p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-semibold text-gray-900">Stock Report</h3>
+                        <h3 class="font-bold text-gray-900">Stock Report</h3>
                         <span class="text-sm text-gray-500">Sorted by quantity</span>
                     </div>
                     <div class="overflow-x-auto">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="bg-white rounded-xl shadow p-6">
-                    <h3 class="font-semibold text-gray-900 mb-4">Low Stock Products</h3>
+                    <h3 class="font-bold text-gray-900 mb-4">Low Stock Products</h3>
                     <div class="space-y-3">
                         <div v-for="product in lowStockProducts" :key="product.id" class="rounded-lg border border-gray-200 p-4">
                             <div class="flex justify-between items-center">
@@ -84,7 +84,7 @@
 
             <div class="bg-white rounded-xl shadow p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-semibold text-gray-900">Top Selling Products</h3>
+                    <h3 class="font-bold text-gray-900">Top Selling Products</h3>
                     <span class="text-sm text-gray-500">By quantity sold</span>
                 </div>
                 <div class="overflow-x-auto">

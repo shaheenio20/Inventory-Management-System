@@ -8,21 +8,21 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Name -->
                             <div>
-                                <label for="name" class="block font-medium text-sm text-gray-700">Product Name</label>
+                                <label for="name" class="block font-bold text-sm text-gray-700">Product Name</label>
                                 <input id="name" v-model="form.name" type="text" required autofocus class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.name" class="text-sm text-red-600 mt-2">{{ form.errors.name }}</div>
                             </div>
 
                             <!-- Product Code -->
                             <div>
-                                <label for="product_code" class="block font-medium text-sm text-gray-700">Product Code</label>
+                                <label for="product_code" class="block font-bold text-sm text-gray-700">Product Code</label>
                                 <input id="product_code" v-model="form.product_code" type="text" required class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.product_code" class="text-sm text-red-600 mt-2">{{ form.errors.product_code }}</div>
                             </div>
 
                             <!-- Category -->
                             <div>
-                                <label for="category_id" class="block font-medium text-sm text-gray-700">Category</label>
+                                <label for="category_id" class="block font-bold text-sm text-gray-700">Category</label>
                                 <select id="category_id" v-model="form.category_id" required class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                     <option value="" disabled>Select a category</option>
                                     <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
@@ -32,21 +32,21 @@
 
                             <!-- Price -->
                             <div>
-                                <label for="price" class="block font-medium text-sm text-gray-700">Price ($)</label>
+                                <label for="price" class="block font-bold text-sm text-gray-700">Price ($)</label>
                                 <input id="price" v-model="form.price" type="number" step="0.01" required class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.price" class="text-sm text-red-600 mt-2">{{ form.errors.price }}</div>
                             </div>
 
                             <!-- Stock Quantity -->
                             <div>
-                                <label for="stock_quantity" class="block font-medium text-sm text-gray-700">Initial Stock Quantity</label>
+                                <label for="stock_quantity" class="block font-bold text-sm text-gray-700">Initial Stock Quantity</label>
                                 <input id="stock_quantity" v-model="form.stock_quantity" type="number" required class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" />
                                 <div v-if="form.errors.stock_quantity" class="text-sm text-red-600 mt-2">{{ form.errors.stock_quantity }}</div>
                             </div>
 
                             <!-- Image -->
                             <div>
-                                <label for="image" class="block font-medium text-sm text-gray-700">Product Image</label>
+                                <label for="image" class="block font-bold text-sm text-gray-700">Product Image</label>
                                 <input id="image" type="file" @input="form.image = $event.target.files[0]" accept="image/*" class="block mt-1 w-full border-gray-300" />
                                 <div v-if="form.errors.image" class="text-sm text-red-600 mt-2">{{ form.errors.image }}</div>
                             </div>
@@ -54,7 +54,7 @@
 
                         <!-- Description -->
                         <div class="mt-6">
-                            <label for="description" class="block font-medium text-sm text-gray-700">Description</label>
+                            <label for="description" class="block font-bold text-sm text-gray-700">Description</label>
                             <textarea id="description" v-model="form.description" rows="4" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
                             <div v-if="form.errors.description" class="text-sm text-red-600 mt-2">{{ form.errors.description }}</div>
                         </div>
@@ -76,6 +76,7 @@
 <script setup>
 import AdminLayout from '../../Layouts/AdminLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
 defineProps({
     categories: Array
@@ -92,6 +93,17 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post('/products');
+    form.post('/products', {
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Product created successfully.',
+                icon: 'success',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        }
+    });
 };
 </script>

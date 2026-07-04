@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                  <div class="mb-4 flex justify-end">
-                        <Link href="/purchases/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2 font-medium">
+                        <Link href="/purchases/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition m-2 font-bold">
                             Add Purchase Order
                         </Link>
                     </div>
@@ -29,7 +29,7 @@
                                     <td class="p-4 text-gray-700">${{ parseFloat(purchase.total_amount).toFixed(2) }}</td>
                                     <td class="p-4 text-gray-600 capitalize">{{ purchase.status }}</td>
                                     <td class="p-4 text-right">
-                                        <Link :href="`/purchases/${purchase.id}`" class="text-blue-600 hover:underline">View</Link>
+                                        <Link :href="`/purchases/${purchase.id}`" class="text-blue-600 hover:underline font-medium">View</Link>
                                     </td>
                                 </tr>
                                 <tr v-if="purchases.data.length === 0">
