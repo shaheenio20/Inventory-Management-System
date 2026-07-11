@@ -117,7 +117,7 @@
             </div>
 
             <!-- Register Button -->
-            <button type="submit" class="btn-signin" :disabled="form.processing">Create account</button>
+            <button type="submit" class="btn-signin" :disabled="form.processing">Create Account</button>
 
             
         </form>

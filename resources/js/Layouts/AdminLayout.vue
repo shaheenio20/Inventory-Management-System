@@ -140,10 +140,74 @@
                         <i class="fas fa-times text-xs"></i>
                     </button>
                 </form>
-                <button class="relative text-gray-500 hover:text-gray-800">
-                    <i class="fas fa-bell text-lg"></i>
-                    <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
-                </button>
+                <!-- Notifications Dropdown -->
+                <div class="relative notification-container">
+                    <button @click="isNotificationOpen = !isNotificationOpen" class="relative text-gray-500 hover:text-gray-800 focus:outline-none transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">5</span>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <transition 
+                        enter-active-class="transition ease-out duration-200" 
+                        enter-from-class="opacity-0 scale-95 translate-y-2" 
+                        enter-to-class="opacity-100 scale-100 translate-y-0" 
+                        leave-active-class="transition ease-in duration-150" 
+                        leave-from-class="opacity-100 scale-100 translate-y-0" 
+                        leave-to-class="opacity-0 scale-95 translate-y-2">
+                        <div v-show="isNotificationOpen" class="absolute right-0 mt-3 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+                                <span class="text-sm font-bold text-gray-800">Notifications</span>
+                                <button class="text-xs text-blue-600 hover:text-blue-800 transition">Mark all as read</button>
+                            </div>
+                            <div class="max-h-80 overflow-y-auto custom-scrollbar">
+                                <!-- Out of stock -->
+                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-800 font-semibold truncate">🔴 Product is out of stock</p>
+                                        <p class="text-xs text-gray-500 mt-0.5 truncate">Laptop Dell XPS 13</p>
+                                        <p class="text-[10px] text-gray-400 mt-1">2 mins ago</p>
+                                    </div>
+                                </div>
+                                <!-- Expires soon -->
+                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-800 font-semibold truncate">🟠 Product expires in 15 days</p>
+                                        <p class="text-xs text-gray-500 mt-0.5 truncate">Premium Antivirus License</p>
+                                        <p class="text-[10px] text-gray-400 mt-1">1 hour ago</p>
+                                    </div>
+                                </div>
+                                <!-- New supplier -->
+                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-800 font-semibold truncate">🟢 New supplier added</p>
+                                        <p class="text-xs text-gray-500 mt-0.5 truncate">TechCorp Industries</p>
+                                        <p class="text-[10px] text-gray-400 mt-1">3 hours ago</p>
+                                    </div>
+                                </div>
+                                <!-- Purchase received -->
+                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-800 font-semibold truncate">🔵 Purchase received</p>
+                                        <p class="text-xs text-gray-500 mt-0.5 truncate">PO #4021 - 50 Items</p>
+                                        <p class="text-[10px] text-gray-400 mt-1">Yesterday</p>
+                                    </div>
+                                </div>
+                                <!-- Invoice paid -->
+                                <div class="px-4 py-3 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-800 font-semibold truncate">🟡 Invoice paid</p>
+                                        <p class="text-xs text-gray-500 mt-0.5 truncate">INV-2023-089 completed</p>
+                                        <p class="text-[10px] text-gray-400 mt-1">Yesterday</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-100 text-center">
+                                <Link href="#" class="text-xs text-blue-600 hover:text-blue-800 font-semibold transition">View all notifications</Link>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
                 <Link href="/profile" title="Profile">
                     <div class="w-8 h-8 shrink-0 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-sm hover:ring-2 hover:ring-blue-300 transition">
                         {{ $page.props.auth.user.name.charAt(0).toUpperCase() }}
@@ -161,7 +225,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 
@@ -170,13 +234,25 @@ defineProps({
 });
 
 const isMobileSidebarOpen = ref(false);
+const isNotificationOpen = ref(false);
 const page = usePage();
 
 const searchQuery = ref('');
 
+const closeNotifications = (e) => {
+    if (!e.target.closest('.notification-container')) {
+        isNotificationOpen.value = false;
+    }
+};
+
 onMounted(() => {
     const urlParams = new URLSearchParams(window.location.search);
     searchQuery.value = urlParams.get('search') || '';
+    document.addEventListener('click', closeNotifications);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeNotifications);
 });
 
 const submitSearch = () => {
@@ -190,13 +266,13 @@ const resetSearch = () => {
 
 const handleLogout = () => {
     Swal.fire({
-        title: 'Ready to leave?',
-        text: "You are about to log out of the system.",
+        title: 'Ready to logout?',
+        text: "You are going to logged out!",
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#ef4444',
         cancelButtonColor: '#6b7280',
-        confirmButtonText: 'Yes, log me out'
+        confirmButtonText: 'Yes, Logout'
     }).then((result) => {
         if (result.isConfirmed) {
             router.post('/logout');

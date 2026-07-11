@@ -69,7 +69,7 @@
             </div>
 
             <!-- Sign In Button -->
-            <button type="submit" class="btn-signin" :disabled="form.processing">Sign in</button>
+            <button type="submit" class="btn-signin" :disabled="form.processing">Sign In</button>
         </form>
 
         <!-- Demo Quick Login -->
