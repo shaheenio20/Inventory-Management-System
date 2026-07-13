@@ -1,7 +1,7 @@
 <template>
-  <div class="flex bg-gray-200">
+  <div class="flex bg-gray-200 dark:bg-gray-800 min-h-screen">
     <!-- ===== SIDEBAR ===== -->
-    <nav class="sidebar hidden sm:flex bg-gray-900 text-white fixed top-0 left-0 flex-col z-50" :class="{ 'mobile-open': isMobileSidebarOpen }">
+    <nav class="sidebar hidden sm:flex bg-gray-900 dark:bg-gray-950 text-white fixed top-0 left-0 flex-col z-50" :class="{ 'mobile-open': isMobileSidebarOpen }">
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between gap-3 shrink-0">
             <Link href="/dashboard" class="flex items-center space-x-3">
@@ -121,28 +121,32 @@
     </nav>
 
     <!-- ===== MAIN CONTENT ===== -->
-    <div class="main-content flex-1 min-h-screen">
+    <div class="main-content flex-1 min-h-screen text-gray-900 dark:text-gray-100">
         <!-- Top Navbar -->
-        <div class="bg-white shadow-sm px-6 py-3 flex items-center justify-between sticky top-0 z-40">
+        <div class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800/50 dark:border-b dark:border-gray-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40">
             <div class="flex items-center gap-3">
-                <button @click="isMobileSidebarOpen = true" class="sm:hidden p-2 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                <button @click="isMobileSidebarOpen = true" class="sm:hidden p-2 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div>
-                    <h1 v-if="header" class="text-xl font-bold text-gray-800">{{ header }}</h1>
+                    <h1 v-if="header" class="text-xl font-bold text-gray-800 dark:text-gray-100">{{ header }}</h1>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
                 <form @submit.prevent="submitSearch" class="relative hidden sm:block">
-                    <input type="text" v-model="searchQuery" placeholder="Search..." class="pl-9 pr-10 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 w-48">
-                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-xs"></i>
-                    <button v-if="searchQuery" type="button" @click="resetSearch" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition">
+                    <input type="text" v-model="searchQuery" placeholder="Search..." class="pl-9 pr-10 py-1.5 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 rounded-full text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 w-48 border border-transparent dark:border-gray-700">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 dark:text-gray-500 text-xs"></i>
+                    <button v-if="searchQuery" type="button" @click="resetSearch" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition">
                         <i class="fas fa-times text-xs"></i>
                     </button>
                 </form>
+                <!-- Dark Mode Toggle -->
+                <button @click="toggleDarkMode" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 focus:outline-none transition-colors">
+                    <i class="fas" :class="isDarkMode ? 'fa-sun text-yellow-400' : 'fa-moon'"></i>
+                </button>
                 <!-- Notifications Dropdown -->
                 <div class="relative notification-container">
-                    <button @click="isNotificationOpen = !isNotificationOpen" class="relative text-gray-500 hover:text-gray-800 focus:outline-none transition-colors">
+                    <button @click="isNotificationOpen = !isNotificationOpen" class="relative text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 focus:outline-none transition-colors">
                         <i class="fas fa-bell text-lg"></i>
                         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">5</span>
                     </button>
@@ -155,55 +159,55 @@
                         leave-active-class="transition ease-in duration-150" 
                         leave-from-class="opacity-100 scale-100 translate-y-0" 
                         leave-to-class="opacity-0 scale-95 translate-y-2">
-                        <div v-show="isNotificationOpen" class="absolute right-0 mt-3 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-100 flex justify-between items-center">
-                                <span class="text-sm font-bold text-gray-800">Notifications</span>
-                                <button class="text-xs text-blue-600 hover:text-blue-800 transition">Mark all as read</button>
+                        <div v-show="isNotificationOpen" class="absolute right-0 mt-3 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden z-50">
+                            <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                                <span class="text-sm font-bold text-gray-800 dark:text-gray-200">Notifications</span>
+                                <button class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">Mark all as read</button>
                             </div>
                             <div class="max-h-80 overflow-y-auto custom-scrollbar">
                                 <!-- Out of stock -->
-                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                <div class="px-4 py-3 border-b border-gray-50 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700 transition cursor-pointer flex gap-3 items-start">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-800 font-semibold truncate">🔴 Product is out of stock</p>
-                                        <p class="text-xs text-gray-500 mt-0.5 truncate">Laptop Dell XPS 13</p>
-                                        <p class="text-[10px] text-gray-400 mt-1">2 mins ago</p>
+                                        <p class="text-sm text-gray-800 dark:text-gray-200 font-semibold truncate">🔴 Product is out of stock</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Laptop Dell XPS 13</p>
+                                        <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">2 mins ago</p>
                                     </div>
                                 </div>
                                 <!-- Expires soon -->
-                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                <div class="px-4 py-3 border-b border-gray-50 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700 transition cursor-pointer flex gap-3 items-start">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-800 font-semibold truncate">🟠 Product expires in 15 days</p>
-                                        <p class="text-xs text-gray-500 mt-0.5 truncate">Premium Antivirus License</p>
-                                        <p class="text-[10px] text-gray-400 mt-1">1 hour ago</p>
+                                        <p class="text-sm text-gray-800 dark:text-gray-200 font-semibold truncate">🟠 Product expires in 15 days</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Premium Antivirus License</p>
+                                        <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">1 hour ago</p>
                                     </div>
                                 </div>
                                 <!-- New supplier -->
-                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                <div class="px-4 py-3 border-b border-gray-50 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700 transition cursor-pointer flex gap-3 items-start">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-800 font-semibold truncate">🟢 New supplier added</p>
-                                        <p class="text-xs text-gray-500 mt-0.5 truncate">TechCorp Industries</p>
-                                        <p class="text-[10px] text-gray-400 mt-1">3 hours ago</p>
+                                        <p class="text-sm text-gray-800 dark:text-gray-200 font-semibold truncate">🟢 New supplier added</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">TechCorp Industries</p>
+                                        <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">3 hours ago</p>
                                     </div>
                                 </div>
                                 <!-- Purchase received -->
-                                <div class="px-4 py-3 border-b border-gray-50 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                <div class="px-4 py-3 border-b border-gray-50 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700 transition cursor-pointer flex gap-3 items-start">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-800 font-semibold truncate">🔵 Purchase received</p>
-                                        <p class="text-xs text-gray-500 mt-0.5 truncate">PO #4021 - 50 Items</p>
-                                        <p class="text-[10px] text-gray-400 mt-1">Yesterday</p>
+                                        <p class="text-sm text-gray-800 dark:text-gray-200 font-semibold truncate">🔵 Purchase received</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">PO #4021 - 50 Items</p>
+                                        <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">Yesterday</p>
                                     </div>
                                 </div>
                                 <!-- Invoice paid -->
-                                <div class="px-4 py-3 hover:bg-blue-50/50 transition cursor-pointer flex gap-3 items-start">
+                                <div class="px-4 py-3 hover:bg-blue-50/50 dark:hover:bg-gray-700 transition cursor-pointer flex gap-3 items-start">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-800 font-semibold truncate">🟡 Invoice paid</p>
-                                        <p class="text-xs text-gray-500 mt-0.5 truncate">INV-2023-089 completed</p>
-                                        <p class="text-[10px] text-gray-400 mt-1">Yesterday</p>
+                                        <p class="text-sm text-gray-800 dark:text-gray-200 font-semibold truncate">🟡 Invoice paid</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">INV-2023-089 completed</p>
+                                        <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">Yesterday</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-100 text-center">
-                                <Link href="#" class="text-xs text-blue-600 hover:text-blue-800 font-semibold transition">View all notifications</Link>
+                            <div class="bg-gray-50 dark:bg-gray-700/50 px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-center">
+                                <Link href="#" class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold transition">View all notifications</Link>
                             </div>
                         </div>
                     </transition>
@@ -235,6 +239,7 @@ defineProps({
 
 const isMobileSidebarOpen = ref(false);
 const isNotificationOpen = ref(false);
+const isDarkMode = ref(false);
 const page = usePage();
 
 const searchQuery = ref('');
@@ -249,6 +254,13 @@ onMounted(() => {
     const urlParams = new URLSearchParams(window.location.search);
     searchQuery.value = urlParams.get('search') || '';
     document.addEventListener('click', closeNotifications);
+    
+    // Initialize dark mode state
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        isDarkMode.value = true;
+    } else {
+        isDarkMode.value = false;
+    }
 });
 
 onUnmounted(() => {
@@ -262,6 +274,18 @@ const submitSearch = () => {
 const resetSearch = () => {
     searchQuery.value = '';
     submitSearch();
+};
+
+const toggleDarkMode = () => {
+    if (isDarkMode.value) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        isDarkMode.value = false;
+    } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        isDarkMode.value = true;
+    }
 };
 
 const handleLogout = () => {
