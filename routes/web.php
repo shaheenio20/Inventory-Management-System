@@ -85,7 +85,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/suppliers', [\App\Http\Controllers\SupplierController::class, 'index'])->name('suppliers.index');
     Route::get('/suppliers/{supplier}', [\App\Http\Controllers\SupplierController::class, 'show'])->name('suppliers.show')->where('supplier', '[0-9]+');
 
-    // Sales (All Roles)
+    // Sales & POS (All Roles)
+    Route::get('/pos', [\App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
+    Route::post('/pos/payment-intent', [\App\Http\Controllers\PosController::class, 'createPaymentIntent'])->name('pos.payment-intent');
     Route::resource('sales', \App\Http\Controllers\SaleController::class)->only(['index', 'create', 'store', 'show']);
     Route::get('/sales/{sale}/invoice', [\App\Http\Controllers\SaleController::class, 'invoice'])->name('sales.invoice');
 

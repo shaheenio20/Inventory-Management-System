@@ -1,14 +1,14 @@
 <template>
   <div class="flex bg-gray-200 dark:bg-gray-800 min-h-screen">
     <!-- ===== SIDEBAR ===== -->
-    <nav class="sidebar hidden sm:flex bg-gray-900 dark:bg-gray-950 text-white fixed top-0 left-0 flex-col z-50" :class="{ 'mobile-open': isMobileSidebarOpen }">
+    <nav class="sidebar hidden sm:flex bg-gray-900 dark:bg-gray-950 text-white fixed top-0 left-0 flex-col z-50 print:hidden" :class="{ 'mobile-open': isMobileSidebarOpen }">
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between gap-3 shrink-0">
             <Link href="/dashboard" class="flex items-center space-x-3">
                 <div class="w-8 h-8 shrink-0 bg-blue-500 rounded-lg flex items-center justify-center">
                     <i class="fas fa-boxes text-white text-sm"></i>
                 </div>
-                <span class="text-lg font-bold text-white">Notus IMS</span>
+                <span class="text-lg font-bold text-white">InventoryHub</span>
             </Link>
             <button @click="isMobileSidebarOpen = false" class="sm:hidden p-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition">
                 <i class="fas fa-times"></i>
@@ -61,6 +61,12 @@
                     <Link href="/purchases" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/purchases') }]">
                         <i class="fas fa-shopping-bag w-5 text-center text-pink-400"></i>
                         <span>Purchases</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/pos" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/pos') }]">
+                        <i class="fas fa-desktop w-5 text-center text-green-400"></i>
+                        <span>POS Terminal</span>
                     </Link>
                 </li>
                 <li>
@@ -123,7 +129,7 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div class="main-content flex-1 min-h-screen text-gray-900 dark:text-gray-100">
         <!-- Top Navbar -->
-        <div class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800/50 dark:border-b dark:border-gray-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40">
+        <div class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800/50 dark:border-b dark:border-gray-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40 print:hidden">
             <div class="flex items-center gap-3">
                 <button @click="isMobileSidebarOpen = true" class="sm:hidden p-2 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                     <i class="fas fa-bars"></i>
@@ -324,6 +330,10 @@ const handleLogout = () => {
         z-index: 60;
         background: #111827;
     }
+}
+@media print {
+    .main-content { margin-left: 0 !important; }
+    body, .bg-gray-200, .dark\:bg-gray-800, .min-h-screen { background-color: transparent !important; }
 }
 .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }

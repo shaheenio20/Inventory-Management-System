@@ -37,6 +37,9 @@ class SaleController extends Controller
             'products.*.product_id'  => 'required|exists:products,id',
             'products.*.quantity'    => 'required|integer|min:1',
             'products.*.unit_price'  => 'required|numeric|min:0',
+            'payment_method'         => 'nullable|string|in:cash,card,stripe,bank',
+            'stripe_transaction_id'  => 'nullable|string',
+            'payment_reference'      => 'nullable|string',
         ]);
 
         $totalAmount = 0;
@@ -50,6 +53,9 @@ class SaleController extends Controller
             'customer_phone' => $request->customer_phone,
             'sale_date'      => $request->sale_date,
             'total_amount'   => $totalAmount,
+            'payment_method' => $request->payment_method ?? 'cash',
+            'stripe_transaction_id' => $request->stripe_transaction_id,
+            'payment_reference' => $request->payment_reference,
         ]);
 
         foreach ($request->products as $item) {
