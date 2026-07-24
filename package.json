@@ -19,7 +19,6 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.5.0",
-        "@stripe/stripe-js": "^9.10.0",
         "@vitejs/plugin-vue": "^6.0.7",
         "axios": "^1.18.1",
         "sweetalert2": "^11.26.25",

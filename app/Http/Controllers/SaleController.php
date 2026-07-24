@@ -37,8 +37,7 @@ class SaleController extends Controller
             'products.*.product_id'  => 'required|exists:products,id',
             'products.*.quantity'    => 'required|integer|min:1',
             'products.*.unit_price'  => 'required|numeric|min:0',
-            'payment_method'         => 'nullable|string|in:cash,card,stripe,bank',
-            'stripe_transaction_id'  => 'nullable|string',
+            'payment_method'         => 'nullable|string|in:cash,bank',
             'payment_reference'      => 'nullable|string',
         ]);
 
@@ -54,7 +53,6 @@ class SaleController extends Controller
             'sale_date'      => $request->sale_date,
             'total_amount'   => $totalAmount,
             'payment_method' => $request->payment_method ?? 'cash',
-            'stripe_transaction_id' => $request->stripe_transaction_id,
             'payment_reference' => $request->payment_reference,
         ]);
 

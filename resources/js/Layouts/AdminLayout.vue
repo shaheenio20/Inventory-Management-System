@@ -1,7 +1,7 @@
 <template>
-  <div class="flex bg-gray-200 dark:bg-gray-800 min-h-screen">
+  <div class="flex bg-[#020617] relative overflow-hidden z-0 min-h-screen">
     <!-- ===== SIDEBAR ===== -->
-    <nav class="sidebar hidden sm:flex bg-gray-900 dark:bg-gray-950 text-white fixed top-0 left-0 flex-col z-50 print:hidden" :class="{ 'mobile-open': isMobileSidebarOpen }">
+    <nav class="sidebar hidden sm:flex bg-slate-900/95 backdrop-blur-xl dark:bg-slate-950/95 border-r border-white/10 dark:border-slate-800/50 text-white fixed top-0 left-0 flex-col z-50 print:hidden" :class="{ 'mobile-open': isMobileSidebarOpen }">
         <!-- Logo -->
         <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between gap-3 shrink-0">
             <Link href="/dashboard" class="flex items-center space-x-3">
@@ -63,12 +63,7 @@
                         <span>Purchases</span>
                     </Link>
                 </li>
-                <li>
-                    <Link href="/pos" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/pos') }]">
-                        <i class="fas fa-desktop w-5 text-center text-green-400"></i>
-                        <span>POS Terminal</span>
-                    </Link>
-                </li>
+
                 <li>
                     <Link href="/sales" :class="['sidebar-link flex items-center space-x-3 px-3 py-2.5 text-sm text-gray-200', { 'active': $page.url.startsWith('/sales') }]">
                         <i class="fas fa-cash-register w-5 text-center text-teal-400"></i>
@@ -127,9 +122,9 @@
     </nav>
 
     <!-- ===== MAIN CONTENT ===== -->
-    <div class="main-content flex-1 min-h-screen text-gray-900 dark:text-gray-100">
+    <div class="main-content flex-1 min-h-screen">
         <!-- Top Navbar -->
-        <div class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800/50 dark:border-b dark:border-gray-800 px-6 py-3 flex items-center justify-between sticky top-0 z-40 print:hidden">
+        <div class="bg-[#0f172a]/80 backdrop-blur-xl shadow-sm border-b border-[#1e293b] px-6 py-3 flex items-center justify-between sticky top-0 z-40 print:hidden">
             <div class="flex items-center gap-3">
                 <button @click="isMobileSidebarOpen = true" class="sm:hidden p-2 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                     <i class="fas fa-bars"></i>
@@ -146,13 +141,9 @@
                         <i class="fas fa-times text-xs"></i>
                     </button>
                 </form>
-                <!-- Dark Mode Toggle -->
-                <button @click="toggleDarkMode" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 focus:outline-none transition-colors">
-                    <i class="fas" :class="isDarkMode ? 'fa-sun text-yellow-400' : 'fa-moon'"></i>
-                </button>
                 <!-- Notifications Dropdown -->
                 <div class="relative notification-container">
-                    <button @click="isNotificationOpen = !isNotificationOpen" class="relative text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 focus:outline-none transition-colors">
+                    <button @click="isNotificationOpen = !isNotificationOpen" class="relative text-gray-400 hover:text-white focus:outline-none transition-colors">
                         <i class="fas fa-bell text-lg"></i>
                         <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">5</span>
                     </button>
@@ -333,10 +324,129 @@ const handleLogout = () => {
 }
 @media print {
     .main-content { margin-left: 0 !important; }
-    body, .bg-gray-200, .dark\:bg-gray-800, .min-h-screen { background-color: transparent !important; }
+    body, .min-h-screen, .bg-[#020617] { background-color: transparent !important; }
+    .main-content .bg-white, .main-content .bg-gray-50 { 
+        background-color: white !important; 
+        border: none !important;
+        box-shadow: none !important;
+        color: black !important;
+    }
+    .main-content * {
+        color: black !important;
+    }
 }
 .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+/* Premium Slate Theme Overrides */
+.main-content {
+    background-color: #020617 !important; /* slate-950 */
+    color: #f8fafc !important; /* slate-50 */
+}
+
+/* Override Light Backgrounds to Slate Panels */
+.main-content .bg-white,
+.main-content .bg-gray-50,
+.main-content .bg-gray-100,
+.main-content .dark\:bg-gray-800,
+.main-content .dark\:bg-gray-900 {
+    background-color: #0f172a !important; /* slate-900 */
+    border: 1px solid #1e293b !important; /* slate-800 */
+    color: #f1f5f9 !important; /* slate-100 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Force text colors to match dark theme */
+.main-content .text-gray-900, 
+.main-content .text-gray-800,
+.main-content .dark\:text-gray-100,
+.main-content .dark\:text-gray-200,
+.main-content .text-gray-700 {
+    color: #f8fafc !important; /* slate-50 */
+}
+.main-content .text-gray-600,
+.main-content .text-gray-500,
+.main-content .dark\:text-gray-300,
+.main-content .dark\:text-gray-400 {
+    color: #94a3b8 !important; /* slate-400 */
+}
+
+/* Fix borders and dividers */
+.main-content .border-gray-100,
+.main-content .border-gray-200,
+.main-content .border-gray-300,
+.main-content .dark\:border-gray-600,
+.main-content .dark\:border-gray-700,
+.main-content .dark\:border-gray-800 {
+    border-color: #1e293b !important; /* slate-800 */
+}
+.main-content .divide-gray-50 > :not([hidden]) ~ :not([hidden]),
+.main-content .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #1e293b !important;
+}
+
+/* Fix Tables */
+.main-content table th {
+    background-color: #020617 !important;
+    color: #cbd5e1 !important;
+    border-bottom: 1px solid #1e293b !important;
+}
+.main-content table td {
+    border-bottom: 1px solid #1e293b !important;
+}
+.main-content table tr:hover td {
+    background-color: #1e293b !important;
+}
+
+/* Fix Inputs inside main content */
+.main-content input, 
+.main-content select, 
+.main-content textarea {
+    background-color: #020617 !important; /* slate-950 */
+    border: 1px solid #1e293b !important; /* slate-800 */
+    color: #f8fafc !important;
+}
+.main-content input:focus, 
+.main-content select:focus, 
+.main-content textarea:focus {
+    border-color: #3b82f6 !important; /* blue-500 */
+    box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+
+/* Fix hovered backgrounds */
+.main-content .hover\:bg-gray-50:hover,
+.main-content .hover\:bg-gray-100:hover,
+.main-content .hover\:bg-gray-200:hover,
+.main-content .dark\:hover\:bg-gray-700:hover {
+    background-color: #1e293b !important; /* slate-800 */
+}
+
+/* SweetAlert Dark Theme Override */
+.swal2-popup {
+    background-color: #0f172a !important; /* slate-900 */
+    color: #f8fafc !important; /* slate-50 */
+    border: 1px solid #1e293b !important;
+    border-radius: 1rem !important;
+}
+.swal2-title, .swal2-html-container {
+    color: #f8fafc !important;
+}
+.swal2-icon.swal2-success {
+    border-color: #10b981 !important;
+}
+.swal2-icon.swal2-success [class^=swal2-success-line] {
+    background-color: #10b981 !important;
+}
+.swal2-icon.swal2-error {
+    border-color: #ef4444 !important;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: #ef4444 !important;
+}
+.swal2-icon.swal2-warning {
+    border-color: #f59e0b !important;
+    color: #f59e0b !important;
+}
 </style>
